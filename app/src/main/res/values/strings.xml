@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Ludotheque</string>
+    <string name="detail_des_regles_simplifiees">Détail des règles simplifiées</string>
+    <string name="regles_simplifiees">Règles simplifiées</string>
+    <string name="regles_pdf">Règles PDF</string>
+    <string name="duree">Durée</string>
+    <string name="age_mini">Age mini</string>
+    <string name="nombre_de_joueurs">Nb de joueurs</string>
+    <string name="titre_du_jeu">Titre du jeu</string>
+    <string name="image_jeu">Image jeu</string>
+</resources>
