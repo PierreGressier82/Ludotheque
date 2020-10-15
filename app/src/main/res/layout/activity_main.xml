@@ -25,6 +25,13 @@
         android:text="@string/titre_du_jeu"/>
 
     <Button
+        android:id="@+id/scroll_jeux"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/liste_jeux"/>
+
+    <Button
         android:id="@+id/choisir_image_jeu"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"

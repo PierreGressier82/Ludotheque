@@ -1,20 +1,21 @@
 package com.pigredorou.ludotheque;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     ImageView mImageChoisi;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button boutonDetailJeu = findViewById(R.id.detail_jeu);
+        Button boutonListeJeux = findViewById(R.id.scroll_jeux);
         Button boutonPhoto = findViewById(R.id.choisir_image_jeu);
         mImageChoisi = findViewById(R.id.image_choisie);
 
@@ -33,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
                public void onClick(View v) {
                    Intent DetailJeu = new Intent(MainActivity.this, JeuDeSocieteActivity.class);
                    startActivityForResult(DetailJeu, 13);
+               }
+           }
+        );
+
+        boutonListeJeux.setOnClickListener(new Button.OnClickListener() {
+                                               @Override
+                                               public void onClick(View v) {
+                   Intent ListeJeux = new Intent(MainActivity.this, IndexableListViewActivity.class);
+                   startActivityForResult(ListeJeux, 12);
                }
            }
         );
@@ -58,21 +69,18 @@ public class MainActivity extends AppCompatActivity {
         // Vérifie si une images est récupérée
         if (resquestCode==14 && resultCode==RESULT_OK) {
             // Accès à l'image
-            Uri imageSelectionnee = data.getData();
-            String[] cheminDuFichier = {MediaStore.Images.Media.DATA};
-            // Curseur pour accès au chemin de l'image
-            Cursor cursor = this.getContentResolver().query(imageSelectionnee, cheminDuFichier, null, null, null);
-            // Position sur le premier (normalement toujours une seule)
-            cursor.moveToFirst();
-            // Récupération du chemin précis de l'image
-            int indexColonne = cursor.getColumnIndex(cheminDuFichier[0]);
-            String cheminImage = cursor.getString(indexColonne);
-            cursor.close();
+            //Uri imageSelectionnee = data.getData();
+            InputStream ims = null;
+            try {
+                ims = getContentResolver().openInputStream(Objects.requireNonNull(data.getData()));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             // Récupération de l'image
-            Bitmap image = BitmapFactory.decodeFile((cheminImage));
+            Bitmap image = BitmapFactory.decodeStream(ims);
             // Redimmenssione l'image
             if (image != null)
-                image = modifieTailleImage(image, 0.2f);
+                image = modifieTailleImage(image, 0.8f);
             // Affichage de l'image
             mImageChoisi.setImageBitmap(image);
         }
@@ -83,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * Permet de redimenssioner une image en fonction de la taille de l'écran
      * @param image : image a redimensionner
-     * @param proportions : proportions voulues
+     * @param proportions : proportions voulues (valeur entre 0 et 1)
      * @return : retourne l'image à la taille choisie
      */
     private Bitmap modifieTailleImage(Bitmap image, float proportions) {

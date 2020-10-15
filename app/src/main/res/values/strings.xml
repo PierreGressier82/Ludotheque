@@ -8,4 +8,5 @@
     <string name="nombre_de_joueurs">Nb de joueurs</string>
     <string name="titre_du_jeu">Titre du jeu</string>
     <string name="image_jeu">Image jeu</string>
+    <string name="liste_jeux">Liste des jeux</string>
 </resources>
