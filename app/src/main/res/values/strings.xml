@@ -9,4 +9,7 @@
     <string name="titre_du_jeu">Titre du jeu</string>
     <string name="image_jeu">Image jeu</string>
     <string name="liste_jeux">Liste des jeux</string>
+    <string name="Valider">valider</string>
+    <string name="jeux_de_societe">Jeux de société</string>
+    <string name="ajout_jeu">Ajouter un jeu</string>
 </resources>

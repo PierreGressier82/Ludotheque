@@ -13,6 +13,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.pigredorou.ludotheque.activity.EditerJeuDeSocieteActivity;
+import com.pigredorou.ludotheque.activity.IndexableListViewActivity;
+import com.pigredorou.ludotheque.activity.JeuDeSocieteActivity;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -25,16 +29,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Masque la barre de titre l'application
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
         Button boutonDetailJeu = findViewById(R.id.detail_jeu);
         Button boutonListeJeux = findViewById(R.id.scroll_jeux);
         Button boutonPhoto = findViewById(R.id.choisir_image_jeu);
+        Button boutonAjouter = findViewById(R.id.ajout_jeu);
         mImageChoisi = findViewById(R.id.image_choisie);
 
         boutonDetailJeu.setOnClickListener(new Button.OnClickListener() {
                @Override
                public void onClick(View v) {
                    Intent DetailJeu = new Intent(MainActivity.this, JeuDeSocieteActivity.class);
-                   startActivityForResult(DetailJeu, 13);
+                   startActivityForResult(DetailJeu, 11);
                }
            }
         );
@@ -42,10 +50,19 @@ public class MainActivity extends AppCompatActivity {
         boutonListeJeux.setOnClickListener(new Button.OnClickListener() {
                                                @Override
                                                public void onClick(View v) {
-                   Intent ListeJeux = new Intent(MainActivity.this, IndexableListViewActivity.class);
-                   startActivityForResult(ListeJeux, 12);
-               }
-           }
+                                                   Intent ListeJeux = new Intent(MainActivity.this, IndexableListViewActivity.class);
+                                                   startActivityForResult(ListeJeux, 12);
+                                               }
+                                           }
+        );
+
+        boutonAjouter.setOnClickListener(new Button.OnClickListener() {
+                                               @Override
+                                               public void onClick(View v) {
+                                                   Intent AjoutJeu = new Intent(MainActivity.this, EditerJeuDeSocieteActivity.class);
+                                                   startActivityForResult(AjoutJeu, 13);
+                                               }
+                                           }
         );
 
         boutonPhoto.setOnClickListener(new Button.OnClickListener() {

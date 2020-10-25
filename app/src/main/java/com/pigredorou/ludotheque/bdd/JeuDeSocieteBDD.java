@@ -10,22 +10,22 @@ public class JeuDeSocieteBDD {
     private SQLiteDatabase bdd;
     private SQLiteOpenHelper maBaseSQLite;
 
-    JeuDeSocieteBDD(Context context){
+    public JeuDeSocieteBDD(Context context){
         //On crée la BDD et sa table
         maBaseSQLite = new JeuDeSocieteDBOpenHelper(context);
     }
 
-    void open(){
+    public void open(){
         //on ouvre la BDD en écriture
         bdd = maBaseSQLite.getWritableDatabase();
     }
 
-    void close(){
+    public void close(){
         //on ferme l'accès à la BDD
         bdd.close();
     }
 
-    void insertClassement(JeuDeSociete jeuDeSociete){
+    public void insertClassement(JeuDeSociete jeuDeSociete){
         //Création d'un ContentValues (fonctionne comme une HashMap)
         ContentValues values = new ContentValues();
         //on lui ajoute une valeur associée à une clé (qui est le nom de la colonne dans laquelle on veut mettre la valeur)
@@ -38,6 +38,8 @@ public class JeuDeSocieteBDD {
         values.put(JeuDeSocieteDBOpenHelper.Constants.COL_RESUMEREGLES, jeuDeSociete.getReglesSimplifiees());
         values.put(JeuDeSocieteDBOpenHelper.Constants.COL_LUDOVOX, jeuDeSociete.getLienLudovox());
         values.put(JeuDeSocieteDBOpenHelper.Constants.COL_DATEAJOUT, jeuDeSociete.getDateAjout());
+        values.put(JeuDeSocieteDBOpenHelper.Constants.COL_EXTENSION, jeuDeSociete.getExtension());
+        values.put(JeuDeSocieteDBOpenHelper.Constants.COL_IMAGECOUVERTURE, jeuDeSociete.getImageCouverture());
         //on insère l'objet dans la BDD via le ContentValues
         bdd.insert(JeuDeSocieteDBOpenHelper.Constants.TABLE_JDS, null, values);
     }
@@ -92,7 +94,7 @@ public class JeuDeSocieteBDD {
     //    return classement;
     //}
 
-    Cursor getJeuxTrieParNom(int nbResult){
+    public Cursor getJeuxTrieParNom(int nbResult){
         //Récupère dans un Cursor les valeurs correspondant à un livre contenu dans la BDD (ici on sélectionne le livre grâce à son titre)
         return bdd.query(JeuDeSocieteDBOpenHelper.Constants.TABLE_JDS, new String[] {
                 JeuDeSocieteDBOpenHelper.Constants.COL_ID,

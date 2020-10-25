@@ -15,14 +15,16 @@ public class JeuDeSocieteDBOpenHelper extends SQLiteOpenHelper {
         // Noms de colonnes
         static final String COL_ID = "_id";
         static final String COL_NOM = "nom";
-        static final String COL_AGEMIN = "AgeMin";
+        static final String COL_AGEMIN = "ageMin";
         static final String COL_NBJMIN = "nbJoueursMin";
         static final String COL_NBJMAX = "nbJoueursMax";
-        static final String COL_DUREE = "Duree";
-        static final String COL_REGLESPDF = "ReglesPDF";
-        static final String COL_RESUMEREGLES = "ResumeRegles";
-        static final String COL_LUDOVOX = "LienLudovox";
+        static final String COL_DUREE = "duree";
+        static final String COL_REGLESPDF = "reglesPDF";
+        static final String COL_RESUMEREGLES = "resumeRegles";
+        static final String COL_LUDOVOX = "lienLudovox";
         static final String COL_DATEAJOUT = "dateAjout";
+        static final String COL_EXTENSION = "extension";
+        static final String COL_IMAGECOUVERTURE = "imageCouverture";
 
         // Index des colonnes
         //public static final int NUM_COL_ID = 0;
@@ -42,7 +44,9 @@ public class JeuDeSocieteDBOpenHelper extends SQLiteOpenHelper {
             + Constants.COL_REGLESPDF + " TEXT, "
             + Constants.COL_RESUMEREGLES + " TEXT, "
             + Constants.COL_LUDOVOX + " TEXT, "
-            + Constants.COL_DATEAJOUT + " DATE NOT NULL)";
+            + Constants.COL_DATEAJOUT + " DATE NOT NULL, "
+            + Constants.COL_EXTENSION + " INTEGER DEFAULT 0,"
+            + Constants.COL_IMAGECOUVERTURE + " BLOB DEFAULT NULL)";
 
     JeuDeSocieteDBOpenHelper(Context context) {
         super(context, Constants.DATABASE_NAME, null, Constants.DATABASE_VERSION);

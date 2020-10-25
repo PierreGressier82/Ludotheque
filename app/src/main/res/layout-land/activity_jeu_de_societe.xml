@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#333333"
     android:orientation="horizontal"
-    tools:context=".JeuDeSocieteActivity">
+    tools:context=".activity.JeuDeSocieteActivity">
 
     <RelativeLayout
         android:id="@+id/relative_layout_image_titre"
@@ -59,6 +59,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="5dp"
+                            android:src="@drawable/jeux_icone_jeu"
                             android:contentDescription="@string/image_jeu" />
 
                     </RelativeLayout>
@@ -80,6 +81,7 @@
 
                                 <ImageView
                                     android:id="@+id/image_nombre_joueurs"
+                                    android:src="@drawable/jeux_icone_nb_pers"
                                     android:layout_width="20dp"
                                     android:layout_height="20dp" />
 
@@ -103,6 +105,7 @@
 
                                 <ImageView
                                     android:id="@+id/image_age_joueur"
+                                    android:src="@drawable/jeux_icone_age"
                                     android:layout_width="20dp"
                                     android:layout_height="20dp" />
 
@@ -125,6 +128,7 @@
 
                                 <ImageView
                                     android:id="@+id/image_duree"
+                                    android:src="@drawable/jeux_icone_duree"
                                     android:layout_width="20dp"
                                     android:layout_height="20dp" />
 
@@ -147,6 +151,7 @@
 
                                 <ImageView
                                     android:id="@+id/image_regle_PDF"
+                                    android:src="@drawable/jeux_icone_pdf"
                                     android:layout_width="20dp"
                                     android:layout_height="20dp" />
 
@@ -172,6 +177,7 @@
 
                 <ImageView
                     android:id="@+id/video_regle_ludovox"
+                    android:src="@drawable/jeux_ludovox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="10dp"/>

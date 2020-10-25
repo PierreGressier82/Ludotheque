@@ -1,8 +1,10 @@
-package com.pigredorou.ludotheque;
+package com.pigredorou.ludotheque.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.pigredorou.ludotheque.R;
 
 public class JeuDeSocieteActivity extends AppCompatActivity {
 

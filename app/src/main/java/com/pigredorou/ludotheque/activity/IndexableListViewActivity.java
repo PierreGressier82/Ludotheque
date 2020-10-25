@@ -1,4 +1,4 @@
-package com.pigredorou.ludotheque;
+package com.pigredorou.ludotheque.activity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.SectionIndexer;
 
+import com.pigredorou.ludotheque.R;
 import com.pigredorou.ludotheque.outils.StringMatcher;
 import com.pigredorou.ludotheque.outils.IndexableListView;
 
