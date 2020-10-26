@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.Objects;
 
 public class EditerJeuDeSocieteActivity extends AppCompatActivity {
-    private Button mBoutonValider;
     private TextView mTitreJeu;
     private NumberPicker mNbJoueursMin;
     private NumberPicker mNbJoueursMax;
@@ -27,6 +26,7 @@ public class EditerJeuDeSocieteActivity extends AppCompatActivity {
     private TextView mReglesPDF;
     private TextView mLienLudovox;
     private TextView mDescription;
+    public String[] listeDuree = {"5","15","20","30","45","60","90","120","180"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +36,7 @@ public class EditerJeuDeSocieteActivity extends AppCompatActivity {
         //Masque la barre de titre l'application
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        String[] listeDuree = {"5","15","20","30","45","60","90","120","180"};
-
-        mBoutonValider = findViewById(R.id.bouton_valider);
+        Button boutonValider = findViewById(R.id.bouton_valider);
         mTitreJeu = findViewById(R.id.edit_text_titre);
         mNbJoueursMin = findViewById(R.id.nb_joueurs_min);
         mNbJoueursMax = findViewById(R.id.nb_joueurs_max);
@@ -66,7 +64,7 @@ public class EditerJeuDeSocieteActivity extends AppCompatActivity {
         mDuree.setDisplayedValues(listeDuree);
         mDuree.setWrapSelectorWheel(false);
 
-        mBoutonValider.setOnClickListener(new View.OnClickListener() {
+        boutonValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Insertion en base des valeurs de l'activité

@@ -13,23 +13,41 @@ public class JeuDeSociete {
     private int mExtension; // Renseigné uniquement si le jeu est une extension. Pointe vers l'ID du jeu de base
     private byte[] mImageCouverture; // Image de la couverture du jeu
 
-    String getNom() {
+    public JeuDeSociete() {
+        super();
+    }
+
+    public JeuDeSociete(String nom, int nbJoueursMin, int nbJoueursMax, int ageMini, int duree) {
+        super();
+        this.mNom=nom;
+        this.mAgeMini=ageMini;
+        this.mNbJoueursMin=nbJoueursMin;
+        this.mNbJoueursMax=nbJoueursMax;
+        this.mDuree=duree;
+    }
+
+    @Override
+    public String toString() {
         return this.mNom;
     }
 
-    int getAgeMini() {
+    public String getNom() {
+        return this.mNom;
+    }
+
+    public int getAgeMini() {
         return this.mAgeMini;
     }
 
-    int getDuree() {
+    public int getDuree() {
         return this.mDuree;
     }
 
-    int getNbJoueursMin() {
+    public int getNbJoueursMin() {
         return this.mNbJoueursMin;
     }
 
-    int getNbJoueursMax() {
+    public int getNbJoueursMax() {
         return this.mNbJoueursMax;
     }
 

@@ -94,15 +94,17 @@ public class JeuDeSocieteBDD {
     //    return classement;
     //}
 
-    public Cursor getJeuxTrieParNom(int nbResult){
+    public Cursor getJeuxTrieParNom(){
         //Récupère dans un Cursor les valeurs correspondant à un livre contenu dans la BDD (ici on sélectionne le livre grâce à son titre)
         return bdd.query(JeuDeSocieteDBOpenHelper.Constants.TABLE_JDS, new String[] {
                 JeuDeSocieteDBOpenHelper.Constants.COL_ID,
                 JeuDeSocieteDBOpenHelper.Constants.COL_NOM,
                 JeuDeSocieteDBOpenHelper.Constants.COL_NBJMIN,
                 JeuDeSocieteDBOpenHelper.Constants.COL_NBJMAX,
+                JeuDeSocieteDBOpenHelper.Constants.COL_AGEMIN,
+                JeuDeSocieteDBOpenHelper.Constants.COL_DUREE,
                 JeuDeSocieteDBOpenHelper.Constants.COL_DATEAJOUT,
-                }, null, null, null, null, JeuDeSocieteDBOpenHelper.Constants.COL_NOM + " DESC", String.valueOf(nbResult));
+                }, null, null, null, null, JeuDeSocieteDBOpenHelper.Constants.COL_NOM + " ASC", null);
     }
 
 }

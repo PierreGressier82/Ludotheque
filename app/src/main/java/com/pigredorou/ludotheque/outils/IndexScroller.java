@@ -52,7 +52,7 @@ public class IndexScroller {
     private static final int STATE_SHOWN = 2;
     private static final int STATE_HIDING = 3;
 
-    public IndexScroller(Context context, ListView lv) {
+    IndexScroller(Context context, ListView lv) {
         mDensity = context.getResources().getDisplayMetrics().density;
         mScaledDensity = context.getResources().getDisplayMetrics().scaledDensity;
         mListView = lv;
@@ -63,7 +63,7 @@ public class IndexScroller {
         mPreviewPadding = 5 * mDensity;
     }
 
-    public void draw(Canvas canvas) {
+    void draw(Canvas canvas) {
         if (mState == STATE_HIDDEN)
             return;
 
@@ -116,7 +116,7 @@ public class IndexScroller {
         }
     }
 
-    public boolean onTouchEvent(MotionEvent ev) {
+    boolean onTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 // If down event occurs inside index bar region, start indexing
@@ -154,7 +154,7 @@ public class IndexScroller {
         return false;
     }
 
-    public void onSizeChanged(int w, int h, int oldw, int oldh) {
+    void onSizeChanged(int w, int h, int oldw, int oldh) {
         mListViewWidth = w;
         mListViewHeight = h;
         mIndexbarRect = new RectF(w - mIndexbarMargin - mIndexbarWidth
@@ -163,19 +163,19 @@ public class IndexScroller {
                 , h - mIndexbarMargin);
     }
 
-    public void show() {
+    void show() {
         if (mState == STATE_HIDDEN)
             setState(STATE_SHOWING);
         else if (mState == STATE_HIDING)
             setState(STATE_HIDING);
     }
 
-    public void hide() {
+    void hide() {
         if (mState == STATE_SHOWN)
             setState(STATE_HIDING);
     }
 
-    public void setAdapter(Adapter adapter) {
+    void setAdapter(Adapter adapter) {
         if (adapter instanceof SectionIndexer) {
             mIndexer = (SectionIndexer) adapter;
             mSections = (String[]) mIndexer.getSections();
@@ -209,7 +209,7 @@ public class IndexScroller {
         }
     }
 
-    public boolean contains(float x, float y) {
+    boolean contains(float x, float y) {
         // Determine if the point is in index bar region, which includes the right margin of the bar
         return (x >= mIndexbarRect.left && y >= mIndexbarRect.top && y <= mIndexbarRect.top + mIndexbarRect.height());
     }
