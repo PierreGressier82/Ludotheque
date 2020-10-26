@@ -9,7 +9,7 @@ public class JeuDeSocieteDBOpenHelper extends SQLiteOpenHelper {
     static class Constants implements BaseColumns {
 
         static final String DATABASE_NAME = "ludotheque.db";
-        static final int DATABASE_VERSION = 1;
+        static final int DATABASE_VERSION = 2;
         static final String TABLE_JDS = "JeuxSociete";
 
         // Noms de colonnes

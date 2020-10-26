@@ -1,5 +1,6 @@
 package com.pigredorou.ludotheque.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,8 +36,10 @@ public class EditerJeuDeSocieteActivity extends AppCompatActivity {
         //Masque la barre de titre l'application
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        String[] listeDuree = {"5","15","20","30","45","60","90","120","180"};
+
         mBoutonValider = findViewById(R.id.bouton_valider);
-        mTitreJeu = findViewById(R.id.text_titre_du_jeu);
+        mTitreJeu = findViewById(R.id.edit_text_titre);
         mNbJoueursMin = findViewById(R.id.nb_joueurs_min);
         mNbJoueursMax = findViewById(R.id.nb_joueurs_max);
         mAgeMin = findViewById(R.id.age_mini);
@@ -44,6 +47,24 @@ public class EditerJeuDeSocieteActivity extends AppCompatActivity {
         mReglesPDF = findViewById(R.id.text_regles_pdf);
         mLienLudovox = findViewById(R.id.text_lien_ludovox);
         mDescription = findViewById(R.id.text_description_detaillee);
+
+        //mNbJoueursMin.setTextColor(R.color.gris_fonce);
+        mNbJoueursMin.setMinValue(1);
+        mNbJoueursMin.setMaxValue(20);
+        mNbJoueursMin.setValue(1);
+        mNbJoueursMin.setWrapSelectorWheel(false);
+        mNbJoueursMax.setMinValue(1);
+        mNbJoueursMax.setMaxValue(100);
+        mNbJoueursMax.setValue(2);
+        mNbJoueursMax.setWrapSelectorWheel(false);
+        mAgeMin.setMinValue(4);
+        mAgeMin.setMaxValue(18);
+        mAgeMin.setValue(8);
+        mAgeMin.setWrapSelectorWheel(false);
+        mDuree.setMinValue(1);
+        mDuree.setMaxValue(listeDuree.length);
+        mDuree.setDisplayedValues(listeDuree);
+        mDuree.setWrapSelectorWheel(false);
 
         mBoutonValider.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,14 +74,14 @@ public class EditerJeuDeSocieteActivity extends AppCompatActivity {
                 DateFormat format = DateFormat.getDateInstance();
                 Date date = new Date();
 
-                jeuAAjouter.setNom(mTitreJeu.toString());
+                jeuAAjouter.setNom(mTitreJeu.getText().toString());
                 jeuAAjouter.setNbJoueursMin(mNbJoueursMin.getValue());
                 jeuAAjouter.setNbJoueursMax(mNbJoueursMax.getValue());
                 jeuAAjouter.setAgeMini(mAgeMin.getValue());
                 jeuAAjouter.setDuree(mDuree.getValue());
-                jeuAAjouter.setReglesPDF(mReglesPDF.toString());
-                jeuAAjouter.setLienLudovox(mLienLudovox.toString());
-                jeuAAjouter.setReglesSimplifiees(mDescription.toString());
+                jeuAAjouter.setReglesPDF(mReglesPDF.getText().toString());
+                jeuAAjouter.setLienLudovox(mLienLudovox.getText().toString());
+                jeuAAjouter.setReglesSimplifiees(mDescription.getText().toString());
                 jeuAAjouter.setDateAjout(format.format(date));
 
                 // Ouvre une instance de la base, ajoute l'élément et ferme la base
@@ -68,6 +89,8 @@ public class EditerJeuDeSocieteActivity extends AppCompatActivity {
                 jeuDeSocieteBDD.open();
                 jeuDeSocieteBDD.insertClassement(jeuAAjouter);
                 jeuDeSocieteBDD.close();
+
+                finish();
             }
         });
 
