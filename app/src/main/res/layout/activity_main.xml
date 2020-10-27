@@ -16,13 +16,6 @@
         android:textStyle="bold"
         android:text="@string/jeux_de_societe"/>
     <Button
-        android:id="@+id/detail_jeu"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/titre_du_jeu"/>
-
-    <Button
         android:id="@+id/scroll_jeux"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"

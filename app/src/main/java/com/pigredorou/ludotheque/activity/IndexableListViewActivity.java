@@ -2,11 +2,16 @@ package com.pigredorou.ludotheque.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.SectionIndexer;
 import android.widget.Toast;
 
+import com.pigredorou.ludotheque.MainActivity;
 import com.pigredorou.ludotheque.R;
 import com.pigredorou.ludotheque.bdd.JeuDeSociete;
 import com.pigredorou.ludotheque.bdd.JeuDeSocieteBDD;
@@ -20,33 +25,20 @@ import java.util.Objects;
 
 public class IndexableListViewActivity extends Activity {
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        //MovieAdaptater adapter = new MovieAdaptater(getApplicationContext(), R.layout.activity_item, movies);
-        //ListView list_movies = (ListView) findViewById(R.id.list_movies);
-        //list_movies.setAdapter(adapter);
-        //list_movies.setOnItemClickListener(listview_listerner);
-
-
-    //OnItemClickListener listview_listerner = new OnItemClickListener() {
-    //    @Override
-    //    public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-    //        View titleView = view.findViewById(R.id.title);
-    //        String title = (String) titleView.getTag();
-    //        Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();
-    //    }
-    //};
-
-    ArrayList<JeuDeSociete> jeuxDeSociete = new ArrayList<>();
+        ArrayList<JeuDeSociete> jeuxDeSociete = new ArrayList<>();
 
         // Ouvre une instance de la base, ajoute l'élément et ferme la base
         JeuDeSocieteBDD jeuDeSocieteBDD = new JeuDeSocieteBDD(getBaseContext());
         jeuDeSocieteBDD.open();
-        Cursor cursor=jeuDeSocieteBDD.getJeuxTrieParNom();
+        Cursor cursor = jeuDeSocieteBDD.getJeuxTrieParNom();
 
         if (cursor.moveToFirst()) {
             // The elements to retrieve
@@ -55,7 +47,7 @@ public class IndexableListViewActivity extends Activity {
             //String date;
             int count = 0;
             do {
-                //id = cursor.getInt(0);
+                id = cursor.getInt(0);
                 nom = cursor.getString(1);
                 nbJMin = cursor.getInt(2);
                 nbJMax = cursor.getInt(3);
@@ -65,11 +57,10 @@ public class IndexableListViewActivity extends Activity {
                 count++;
                 // Affichage de la ligne
                 //ajouteLigneTableau(layoutTableauScores, String.valueOf(count),String.valueOf(score),nom,date);
-                jeuxDeSociete.add(new JeuDeSociete(nom, nbJMin, nbJMax, ageMin, duree));
+                jeuxDeSociete.add(new JeuDeSociete(id, nom, nbJMin, nbJMax, ageMin, duree));
             } while (cursor.moveToNext());
-        }
-        else {
-            Toast.makeText(this, "Pas de score", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Pas de jeu", Toast.LENGTH_LONG).show();
         }
 
         jeuDeSocieteBDD.close();
@@ -239,16 +230,39 @@ public class IndexableListViewActivity extends Activity {
         //items.add("Wings of War: Watch Your Back!");
         //Collections.sort(jeuxDeSociete);
 
-        //ContentAdapter adapter = new ContentAdapter(this,android.R.layout.simple_list_item_1, jeuxDeSociete);
-
         ContentAdapter adapter = new ContentAdapter(this, android.R.layout.simple_list_item_1, jeuxDeSociete);
         //ListView list_movies = (ListView) findViewById(R.id.list_movies);
         //list_movies.setAdapter(adapter);
         //list_movies.setOnItemClickListener(listview_listerner);
 
+        //OnItemClickListener listview_listerner = new OnItemClickListener() {
+        //    @Override
+        //    public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+        //        View titleView = view.findViewById(R.id.title);
+        //        String title = (String) titleView.getTag();
+        //        Toast.makeText(getApplicationContext(), title, Toast.LENGTH_SHORT).show();
+        //    }
+        //};
+
         IndexableListView listView = findViewById(R.id.listview);
         listView.setAdapter(adapter);
+        // Ajout du nombre de jeu en fin de liste
+        //listView.addnew View(), data, false);
         listView.setFastScrollEnabled(true);
+
+        listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                View titleView = view.findViewById(R.id.titre_jeu);
+                int idJeu = (int) titleView.getTag();
+                //Toast.makeText(view.getContext(), String.valueOf(idJeu), Toast.LENGTH_SHORT).show();
+
+                // Affiche le détail du jeu
+                Intent DetailJeu = new Intent(IndexableListViewActivity.this, JeuDeSocieteActivity.class);
+                DetailJeu.putExtra(MainActivity.PREF_KEY_ID_JEU, idJeu);
+                startActivityForResult(DetailJeu, 11);
+            }
+        });
     }
 
     private static class ContentAdapter extends JeuDeSocieteAdapter implements SectionIndexer {
@@ -291,7 +305,5 @@ public class IndexableListViewActivity extends Activity {
                 sections[i] = String.valueOf(mSections.charAt(i));
             return sections;
         }
-
-
     }
 }

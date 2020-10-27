@@ -24,11 +24,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-
-import com.pigredorou.ludotheque.R;
 
 public class IndexableListView extends ListView {
 
@@ -103,9 +98,15 @@ public class IndexableListView extends ListView {
 
     @Override
     public boolean performItemClick(View view, int position, long id) {
-        View titleView = view.findViewById(R.id.titre_jeu);
-        String titre = (String) titleView.getTag();
-        Toast.makeText(view.getContext(), titre, Toast.LENGTH_SHORT).show();
+        //View titleView = view.findViewById(R.id.titre_jeu);
+        //int idJeu = (int) titleView.getTag();
+        //Toast.makeText(view.getContext(), String.valueOf(idJeu), Toast.LENGTH_SHORT).show();
+
+        // Enregistre l'id du jeu a afficher
+        //Intent DetailJeu = new Intent(IndexableListViewActivity.this, JeuDeSocieteActivity.class);
+        //DetailJeu.putExtra(MainActivity.PREF_KEY_ID_JEU, idJeu);
+        //startActivityForResult(DetailJeu, 15);
+
         return super.performItemClick(view, position, id);
     }
 

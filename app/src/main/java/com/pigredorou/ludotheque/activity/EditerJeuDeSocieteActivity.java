@@ -26,7 +26,7 @@ public class EditerJeuDeSocieteActivity extends AppCompatActivity {
     private TextView mReglesPDF;
     private TextView mLienLudovox;
     private TextView mDescription;
-    public String[] listeDuree = {"5","15","20","30","45","60","90","120","180"};
+    public static String[] listeDuree = {"5","15","20","30","45","60","90","120","180"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

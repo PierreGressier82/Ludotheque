@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pigredorou.ludotheque.R;
+import com.pigredorou.ludotheque.activity.EditerJeuDeSocieteActivity;
 import com.pigredorou.ludotheque.bdd.JeuDeSociete;
 
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ import java.util.ArrayList;
 public class JeuDeSocieteAdapter extends ArrayAdapter<JeuDeSociete> {
     private final Context _context;
     private ArrayList<JeuDeSociete> _jeuxDeSociete;
-    private String[] listeDuree = {"5","15","20","30","45","60","90","120","180"};
 
     public JeuDeSocieteAdapter(Context context, int resource, ArrayList<JeuDeSociete> jeuxDeSociete) {
         super(context, resource, jeuxDeSociete);
@@ -38,7 +38,7 @@ public class JeuDeSocieteAdapter extends ArrayAdapter<JeuDeSociete> {
 
         TextView vueTitreJeu = convertView.findViewById(R.id.titre_jeu);
         vueTitreJeu.setText(_jeuxDeSociete.get(position).getNom());
-        vueTitreJeu.setTag(_jeuxDeSociete.get(position).getNom());
+        vueTitreJeu.setTag(_jeuxDeSociete.get(position).getId());
 
         TextView vueAge = convertView.findViewById(R.id.age_mini);
         String texteAge = _jeuxDeSociete.get(position).getAgeMini() + "+ ";
@@ -53,7 +53,7 @@ public class JeuDeSocieteAdapter extends ArrayAdapter<JeuDeSociete> {
         nbJoueur.setText(texteNbJoueurs);
 
         TextView duree = convertView.findViewById(R.id.duree);
-        String texteDuree = listeDuree[_jeuxDeSociete.get(position).getDuree() -1] + " min ";
+        String texteDuree = EditerJeuDeSocieteActivity.listeDuree[_jeuxDeSociete.get(position).getDuree() -1] + " min ";
         duree.setText(texteDuree);
 
         return convertView;

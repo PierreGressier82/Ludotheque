@@ -1,6 +1,7 @@
 package com.pigredorou.ludotheque.bdd;
 
 public class JeuDeSociete {
+    private int mId; // Nom du jeu
     private String mNom; // Nom du jeu
     private int mAgeMini; // Age minimum
     private int mDuree; // Durée en minutes
@@ -17,8 +18,9 @@ public class JeuDeSociete {
         super();
     }
 
-    public JeuDeSociete(String nom, int nbJoueursMin, int nbJoueursMax, int ageMini, int duree) {
+    public JeuDeSociete(int id, String nom, int nbJoueursMin, int nbJoueursMax, int ageMini, int duree) {
         super();
+        this.mId=id;
         this.mNom=nom;
         this.mAgeMini=ageMini;
         this.mNbJoueursMin=nbJoueursMin;
@@ -29,6 +31,10 @@ public class JeuDeSociete {
     @Override
     public String toString() {
         return this.mNom;
+    }
+
+    public int getId() {
+        return this.mId;
     }
 
     public String getNom() {
@@ -75,6 +81,10 @@ public class JeuDeSociete {
         return this.mImageCouverture;
     }
 
+    public void setId(int id) {
+         this.mId=id;
+    }
+
     public void setNom(String nom) {
         this.mNom=nom;
     }
@@ -118,4 +128,5 @@ public class JeuDeSociete {
     public void setImageCouverture(byte[] imageCouverture) {
         this.mImageCouverture=imageCouverture;
     }
+
 }
